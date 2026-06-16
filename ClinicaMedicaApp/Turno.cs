@@ -2,7 +2,6 @@ namespace ClinicaMedica
 {
     public class Turno
     {
-        public int IdTurno { get; set; }
         public int Dni { get; set; }
         public int Matricula { get; set; }
         public int IdEspecialidad { get; set; }

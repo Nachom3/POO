@@ -8,7 +8,6 @@ namespace ClinicaMedica
         static void Main(string[] args)
         {
             var context = new ClinicaContext();
-            context.Database.EnsureCreated();
 
             bool salir = false;
 

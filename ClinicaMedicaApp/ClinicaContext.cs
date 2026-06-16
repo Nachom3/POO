@@ -66,7 +66,7 @@ namespace ClinicaMedica
 
             modelBuilder.Entity<Turno>()
                 .ToTable("turno")
-                .HasKey(t => t.IdTurno);
+                .HasKey(t => new { t.Dni, t.Matricula, t.IdEspecialidad });
             modelBuilder.Entity<Turno>()
                 .Property(t => t.IdEspecialidad).HasColumnName("id_especialidad");
             modelBuilder.Entity<Turno>()
@@ -87,36 +87,6 @@ namespace ClinicaMedica
                 .HasOne(t => t.Estado)
                 .WithMany()
                 .HasForeignKey(t => t.IdEstado);
-
-            modelBuilder.Entity<Estado>().HasData(
-                new Estado { IdEstado = 1, Descripcion = "reservado" },
-                new Estado { IdEstado = 2, Descripcion = "cancelado" }
-            );
-
-            modelBuilder.Entity<Especialidad>().HasData(
-                new Especialidad { IdEspecialidad = 1, Nombre = "Clinica General", DuracionTurnoMin = 30 },
-                new Especialidad { IdEspecialidad = 2, Nombre = "Cardiologia", DuracionTurnoMin = 45 },
-                new Especialidad { IdEspecialidad = 3, Nombre = "Pediatria", DuracionTurnoMin = 30 },
-                new Especialidad { IdEspecialidad = 4, Nombre = "Traumatologia", DuracionTurnoMin = 40 }
-            );
-
-            modelBuilder.Entity<Medico>().HasData(
-                new Medico { Matricula = 1001, Nombre = "Carlos", Apellido = "Lopez", Activo = 1 },
-                new Medico { Matricula = 1002, Nombre = "Maria", Apellido = "Garcia", Activo = 1 },
-                new Medico { Matricula = 1003, Nombre = "Pedro", Apellido = "Rodriguez", Activo = 1 },
-                new Medico { Matricula = 1004, Nombre = "Ana", Apellido = "Martinez", Activo = 1 }
-            );
-
-            modelBuilder.Entity<Disponibilidad>().HasData(
-                new Disponibilidad { Matricula = 1001, IdEspecialidad = 1, DiaSemana = 1, HoraInicio = "08:00", HoraFin = "12:00" },
-                new Disponibilidad { Matricula = 1001, IdEspecialidad = 1, DiaSemana = 3, HoraInicio = "08:00", HoraFin = "12:00" },
-                new Disponibilidad { Matricula = 1002, IdEspecialidad = 2, DiaSemana = 2, HoraInicio = "09:00", HoraFin = "13:00" },
-                new Disponibilidad { Matricula = 1002, IdEspecialidad = 2, DiaSemana = 4, HoraInicio = "09:00", HoraFin = "13:00" },
-                new Disponibilidad { Matricula = 1003, IdEspecialidad = 3, DiaSemana = 1, HoraInicio = "10:00", HoraFin = "14:00" },
-                new Disponibilidad { Matricula = 1003, IdEspecialidad = 3, DiaSemana = 5, HoraInicio = "10:00", HoraFin = "14:00" },
-                new Disponibilidad { Matricula = 1004, IdEspecialidad = 4, DiaSemana = 2, HoraInicio = "08:00", HoraFin = "12:00" },
-                new Disponibilidad { Matricula = 1004, IdEspecialidad = 4, DiaSemana = 4, HoraInicio = "08:00", HoraFin = "12:00" }
-            );
         }
     }
 }
